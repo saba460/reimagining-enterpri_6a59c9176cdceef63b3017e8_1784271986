@@ -1,0 +1,55 @@
+﻿DOCKER INTERMEDIATE 
+Module 1: Advanced Image Creation and Optimization
+Unit 1: Multi-Stage Builds
+* Understanding the Need for Multi-Stage Builds: Reducing image size, separating build-time dependencies from runtime environments.
+* Syntax and Implementation: Using AS alias, copying artifacts from previous stages (COPY --from).
+* Advanced Patterns: Multi-stage builds for different environments (development vs. production), parallel execution of stages.
+Unit 2: Dockerfile Best Practices & Security
+* Layer Caching Optimization: Ordering instructions to maximize cache hits, minimizing instructions to reduce layers.
+* Minimizing Image Footprint: Choosing the right base image (Alpine, Debian-slim, Distroless), combining commands, cleaning up package manager caches (rm -rf /var/lib/apt/lists/*).
+* Container Security Basics: Running containers as non-root users (USER directive), handling build-time secrets securely using docker build --secret.
+Unit 3: Managing Custom Images and Registries
+* Multi-Architecture Builds: Introduction to docker buildx and building images for ARM64 and AMD64 simultaneously.
+* Self-Hosting a Private Registry: Deploying and configuring the local Docker Registry image, setting up basic authentication and TLS.
+Module 2: Advanced Docker Networking
+Unit 1: Network Drivers Deep Dive
+* Bridge Networks: Creating custom bridge networks, understanding user-defined vs. default bridge networks.
+* Host and None Networks: Use cases for --network host and isolating containers with --network none.
+* Overlay Networks: Architecture of multi-host networking (pre-requisite for Swarm), VXLAN encapsulation.
+* Macvlan Networks: Assigning a MAC address to a container, making it appear as a physical device on the network.
+Unit 2: Service Discovery and Network Isolation
+* Embedded DNS: How Docker handles automatic service discovery by container name.
+* Network Security & Segregation: Connecting a container to multiple networks, creating DMZs (Demilitarized Zones) using network boundaries.
+* Port Mapping Mechanics: Understanding how iptables rules are manipulated by Docker for port forwarding (-p).
+Module 3: Advanced Storage and Data Management
+Unit 1: Storage Mechanics & Types
+* The Copy-on-Write (CoW) Strategy: How the storage layer impacts performance, understanding overlay2.
+* Bind Mounts vs. Volumes vs. Tmpfs: Deep dive into use cases, performance trade-offs, and file permission implications.
+Unit 2: Volume Management & Production Patterns
+* Named Volume Lifecycle: Creating, inspecting, backing up, and restoring Docker volumes.
+* Volume Drivers: Introduction to third-party volume plugins (e.g., cloud storage drivers, NFS mounts).
+* Handling File Permissions: Dealing with UID/GID mismatches between the host machine and the containerized application.
+Module 4: Multi-Container Environments with Docker Compose
+Unit 1: Production-Grade Compose Files
+* Compose Specification: Writing advanced docker-compose.yml configurations using extensions (x-) and fragments (& and *).
+* Environment Variables Management: Using .env files, shell variable interpolation, and securing sensitive configurations.
+* Control Flow and Dependencies: Controlling startup order with depends_on (using condition checks like service_healthy).
+Unit 2: Advanced Compose Workflows
+* Multi-File Configurations: Merging configurations using multiple -f flags (e.g., base + development override).
+* Scaling and Resource Management: Scaling services locally (docker compose up --scale), setting CPU and memory limits inside Compose.
+Module 5: Operations, Monitoring, and Security Hardening
+Unit 1: Logging, Monitoring, and Debugging
+* Log Configurations: Configuring alternative logging drivers (JSON-file, journald, GELF, Fluentd), implementing log rotation.
+* Resource Constraints: Limiting container resources at runtime (--memory, --cpus), identifying resource bottlenecks.
+* Advanced Debugging: Inspecting container state (docker inspect, docker stats, docker top), copying files in/out of running containers, attaching to namespaces.
+Unit 2: Container Hardening
+* Vulnerability Scanning: Using docker scout or Trivy to scan images for CVEs during the build process.
+* Linux Capabilities and Seccomp: Dropping unnecessary kernel capabilities (--cap-drop), understanding security profiles.
+* Health Checks: Implementing the HEALTHCHECK directive in Dockerfiles to allow self-healing environments.
+Module 6: CI/CD Integration & Orchestration Introduction
+Unit 1: Docker in CI/CD Pipelines
+* Automated Workflows: Building, testing, and pushing Docker images using GitHub Actions or GitLab CI.
+* Caching in CI: Utilizing remote cache backends (e.g., --cache-from, --cache-to) to speed up automated pipeline builds.
+Unit 2: Transitioning to Orchestration (Docker Swarm)
+* Swarm Mode Concepts: Initializing a cluster, Managers vs. Workers, Nodes, and Services.
+* Deploying a Stack: Converting a Docker Compose file into a production-ready Swarm stack deployment (docker stack deploy).
